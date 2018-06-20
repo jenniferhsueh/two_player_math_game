@@ -5,10 +5,11 @@ class Game
 
   def initialize
     @players = []
+    @curr_player = @players[1]
   end
 
   def start 
-    puts "New game! What is your name?"
+    puts "New player! What is your name?"
     name = gets.chomp
     player = Player.new(name)
     @players.push(player)
@@ -21,18 +22,25 @@ class Game
   end
 
   def run
-    # puts Questions.question
-    @num1 = rand(10) + 1
-    @operator = 
-    @num2 = rand(10) + 1
-    puts @num1
+    turn
+    while @curr_player.lives > 0
+      turn
+    end
   end
 
-  def questions
-    # @num1 = rand
+  def turn
+    if @curr_player == @players[0]
+      @curr_player = @players[1]
+    else 
+      @curr_player = @players[0]
+    end
+    ask_question = Questions.new(@curr_player)
+    ask_question
   end
+
 
 end
 
-new = Game.new
-new.start
+new_game = Game.new
+new_game.start
+# 
