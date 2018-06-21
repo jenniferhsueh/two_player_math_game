@@ -7,8 +7,4 @@ class Player
     @lives = 3
     @score = 0
   end
-
-  # def get_lives
-  #   "#{@lives}/3"
-  # end
 end

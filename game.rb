@@ -5,41 +5,50 @@ class Game
 
   def initialize
     @players = []
-    @curr_player = @players[1]
   end
-
+  
   def start 
     puts "New player! What is your name?"
     name = gets.chomp
     player = Player.new(name)
     @players.push(player)
-    # puts player.name
     if @players.count < 2
       start
     else 
+      @curr_player = @players.first
       run
     end
   end
 
   def run
-    turn
-    while @curr_player.lives > 0
+    while !game_over?
       turn
+      @curr_player = @curr_player.name == @players.first.name ? @players.last : @players.first
     end
   end
 
+  def game_over?
+    @players.any? { |player| player.lives == 0 }
+  end
+
   def turn
-    # if @curr_player == @players[0]
-    #   @curr_player = @players[1]
-    # else 
-    #   @curr_player = @players[0]
-    # end
-    @curr_player == @players[0] ? @curr_player = @players[1] : @curr_player = @players[0]
     ask_question = Questions.new(@curr_player)
     ask_question.question
     ask_question.answer
+    print_lives
   end
 
+  def print_lives
+    player1 = @players.first
+    player2 = @players.last
+    puts "#{player1.name}: #{player1.lives}/3 vs #{player2.name}: #{player2.lives}/3"
+    if game_over?
+      winner = player1.lives > player2.lives ? player1 : player2
+      puts ""
+      puts "----- GAME OVER -----"
+      puts "#{winner.name} wins with a score of #{winner.lives}/3"
+    end
+  end
 end
 
 new_game = Game.new

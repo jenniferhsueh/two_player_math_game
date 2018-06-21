@@ -8,7 +8,8 @@ class Questions
 
   
   def question
-    puts "----- new turn -----"
+    puts ""
+    puts "----- NEW TURN -----"
     @num1 = rand(10) + 1
     @operator = ["+", "-", "*"].sample
     @num2 = rand(10) + 1
@@ -19,15 +20,9 @@ class Questions
     answer = gets.chomp
     if answer.to_i == @num1.send(@operator, @num2)
       puts "YES! You're correct!"
-      print_lives
     else 
       puts "Seriously? No!"
       @curr_player.lives -= 1
-      print_lives
     end
-  end
-
-  def print_lives
-    puts "#{@curr_player.name}: #{@curr_player.lives}/3 vs "
   end
 end
