@@ -29,11 +29,12 @@ class Game
   end
 
   def turn
-    if @curr_player == @players[0]
-      @curr_player = @players[1]
-    else 
-      @curr_player = @players[0]
-    end
+    # if @curr_player == @players[0]
+    #   @curr_player = @players[1]
+    # else 
+    #   @curr_player = @players[0]
+    # end
+    @curr_player == @players[0] ? @curr_player = @players[1] : @curr_player = @players[0]
     ask_question = Questions.new(@curr_player)
     ask_question.question
     ask_question.answer
