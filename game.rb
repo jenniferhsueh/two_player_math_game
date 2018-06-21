@@ -35,12 +35,11 @@ class Game
       @curr_player = @players[0]
     end
     ask_question = Questions.new(@curr_player)
-    ask_question
+    ask_question.question
+    ask_question.answer
   end
-
 
 end
 
 new_game = Game.new
 new_game.start
-# 
